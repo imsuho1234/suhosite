@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<body>
+    <input />
+    <div>abc</div>
+    <button>확인</button>
+    <script>
+        let I = document.querySelector('input');
+        let D = document.querySelector("div");
+        let B = document.querySelector("button");
+
+        // click을 감지하여 만들어 놓은 함수를 실행 합니다. 
+        B.addEventListener("click", function () {
+            let n = I.value;
+            D.innerText = n*10;
+        });
+
+    </script>
+
+</body>
+
+</html>
