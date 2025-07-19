@@ -2,33 +2,86 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>숫자 출력기</title>
+  <title>사람과 말풍선</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      flex-direction: column;
+    }
+
+    .person {
+      position: relative;
+      width: 100px;
+      height: 200px;
+      background-color: #8ac6d1;
+      border-radius: 50px;
+      margin-bottom: 20px;
+    }
+
+    .head {
+      width: 60px;
+      height: 60px;
+      background-color: #ffe0bd;
+      border-radius: 50%;
+      position: absolute;
+      top: -70px;
+      left: 20px;
+    }
+
+    .speech-bubble {
+      position: absolute;
+      top: -120px;
+      left: 110px;
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      display: none;
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -10px;
+      margin-top: -5px;
+      width: 0;
+      height: 0;
+      border-right: 10px solid white;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <input type="number" placeholder="숫자를 입력하세요">
-  <button>출력</button>
-  <div></div>
+  <div class="person">
+    <div class="head"></div>
+    <div class="speech-bubble" id="bubble">똥 마렵다 💩</div>
+  </div>
+  <button onclick="showSpeech()">말하기</button>
 
   <script>
-    // 태그 이름을 이용한 querySelector
-    const input = document.querySelector('input');
-    const button = document.querySelector('button');
-    const outputDiv = document.querySelector('div');
+    function showSpeech() {
+      const bubble = document.getElementById('bubble');
+      bubble.style.display = 'block';
 
-    button.addEventListener('click', function() {
-      const count = parseInt(input.value);
-      outputDiv.innerHTML = ''; // 이전 출력 초기화
-
-      let a = '';
-
-
-      for (let i = 0; i < count; i++) {
-        a += `(${i})`;
-      }
-
-      outputDiv.innerText = a;
-
-    });
+      // 텍스트 음성 출력
+      const msg = new SpeechSynthesisUtterance("똥 마렵다");
+      msg.lang = 'ko-KR';
+      window.speechSynthesis.speak(msg);
+    }
   </script>
 </body>
 </html>
